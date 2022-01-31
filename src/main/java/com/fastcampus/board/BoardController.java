@@ -1,6 +1,7 @@
 package com.fastcampus.board;
 
 import com.fastcampus.board.dto.PostDto;
+import com.fastcampus.board.entity.Board;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ public class BoardController {
     public String createPost(@ModelAttribute("command") PostDto postDto){
         System.out.println("save " + postDto);
         /* TODO: 게시물 추가 로직*/
+
         return "redirect:/"; // 추가 후 홈 화면으로
     }
 
@@ -29,6 +31,7 @@ public class BoardController {
         // 게시물을 받아오는 로직을 작성한 뒤엔 아래 2줄은 삭제 해주셔도 됩니다.
         List<PostDto> postList = new ArrayList<>();
         postList.add(new PostDto(10, "hey", "새 글", "예제"));
+        postList.add(new PostDto(11,"test","테스트 중", "야발 배고파"));
         // *****************************************
 
         model.addAttribute("postList", postList);
