@@ -41,6 +41,7 @@
                     <td>${post.getNickName()}</td>
                     <td>${post.getTitle()}</td>
                     <td>${post.getContent()}</td>
+
                     <td><a href="updateView/${post.getPostId()}">수정</a></td>
                     <td><a href="delete/${post.getPostId()}">삭제</a></td>
                 </tr>

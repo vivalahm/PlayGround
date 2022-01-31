@@ -41,5 +41,10 @@ public class Board {
     @ColumnDefault("0")
     private int cnt;
 
-
+    @Builder
+    public Board(String writer,String title, String content) {
+        this.writer = writer;
+        this.title = title;
+        this.content = content;
+    }
 }
