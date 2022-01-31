@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service
 public class BoardService {
@@ -23,6 +24,12 @@ public class BoardService {
         boardRepository.save(board);
     }
 
+    //GET ALL
+    @Transactional
+    public List<Board> boardList(){
+        return (List<Board>) boardRepository.findAll();
+    }
+
     //GET
     @Transactional
     public Board boardSelect(int id){
@@ -33,14 +40,25 @@ public class BoardService {
 
     //UPDATE
     @Transactional
-    public void boardUpdate(int id, Board requestBoard){
+    public void boardUpdate(int id, String writer, String title, String content){
         Board board = boardRepository.findById(id).orElseThrow(
                 () -> new IllegalIdentifierException("해당 게시글이 없습니다.")
         );
-
-        board.setTitle(requestBoard.getTitle());
-        board.setContent(requestBoard.getContent());
+        board.setWriter(writer);
+        board.setTitle(title);
+        board.setContent(content);
+        board.setCnt(board.getCnt() +1);// 수정 시 CNT 1씩 증가
         System.out.println(board);
+    }
+
+    //UPDATE CNT
+    @Transactional
+    public void boardUpdateCNT(int id){
+        Board board = boardRepository.findById(id).orElseThrow(
+                () -> new IllegalIdentifierException("해당 게시글이 없습니다.")
+        );
+        board.setCnt(board.getCnt() +1);// 수정 시 CNT 1씩 증가
+        System.out.println(board.getCnt());
     }
 
     //DELETE
